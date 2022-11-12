@@ -53,4 +53,10 @@ class Livro{
     }
 }
 
+class Biblioteca{
+    NomeBiblioteca = []
+    EnderecoBiblioteca = []
+    TelefoneBiblioteca = []
+}
+
 let livro = new Livro()

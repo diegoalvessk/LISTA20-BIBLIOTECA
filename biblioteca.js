@@ -29,7 +29,9 @@ disponibilidade desse livro para true;
 7. Crie um objeto da classe Biblioteca e chame seus métodos
 */
 
-let indexGeral = 0
+let indexLivro = 0
+let IndexBiblioteca = 0
+
 
 class Livro{
     Titulos = []
@@ -39,24 +41,44 @@ class Livro{
     Disponibilidades = []
 
     constructor(){
-        this.Titulos[indexGeral] = prompt("Informe o nome do livro.")
-        this.Autores[indexGeral] = prompt("Informe o nome do autor.")
-        this.Editoras[indexGeral] = prompt("Informe a editora do livro.")
-        this.Anos[indexGeral] = parseInt(prompt("Informe o ano de publicação do livro."))
-        this.Disponibilidades[indexGeral] = prompt("O livro está disponível?. s = sim e n = não")
-        if(this.Disponibilidades[indexGeral] == "s"){
-            this.Disponibilidades[indexGeral] = true
+        this.Titulos[indexLivro] = prompt("Informe o nome do livro.")
+        this.Autores[indexLivro] = prompt("Informe o nome do autor.")
+        this.Editoras[indexLivro] = prompt("Informe a editora do livro.")
+        this.Anos[indexLivro] = parseInt(prompt("Informe o ano de publicação do livro."))
+        this.Disponibilidades[indexLivro] = prompt("O livro está disponível?. s = sim e n = não")
+        if(this.Disponibilidades[indexLivro] == "s"){
+            this.Disponibilidades[indexLivro] = true
         }else{
-            this.Disponibilidades[indexGeral] = false
+            this.Disponibilidades[indexLivro] = false
         }
-        indexGeral++
+        indexLivro++
     }
 }
 
 class Biblioteca{
+    Livros
     NomeBiblioteca = []
     EnderecoBiblioteca = []
     TelefoneBiblioteca = []
+
+    constructor(){
+        this.NomeBiblioteca[IndexBiblioteca] = prompt("Informe o nome da biblioteca.")
+        this.EnderecoBiblioteca[IndexBiblioteca] = prompt("Informe o endereço da biblioteca.")
+        this.TelefoneBiblioteca[IndexBiblioteca] = parseInt(prompt("Informe o telefone da biblioteca."))
+    }
+
+    BuscarLivro(nome){
+        for (let index = 0; index < indexLivro; index++) {
+            if(nome == this.Livros.Titulos[index]){
+                alert("O nome do livro é " + this.Livros.Titulos[index] + ". O seu autor é " + this.Livros.Autores[index] + ". Editado por " + this.Livros.Editoras[index] + ". Publicado em " + this.Livros.Anos[index] + ". Disponibilidade (true = tem disponibilidade e false = não tem): " + this.Livros.Disponibilidades[index])
+            }         
+        }
+    }
 }
 
-let livro = new Livro()
+
+        let livro = new Livro()
+        let biblioteca = new Biblioteca()
+        biblioteca.Livros = livro
+        let nome = prompt("Informe o livro que deseja buscar em nossa biblioteca.")
+        biblioteca.BuscarLivro(nome)

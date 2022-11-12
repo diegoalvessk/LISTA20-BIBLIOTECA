@@ -87,6 +87,19 @@ class Biblioteca{
             }         
         }
     }
+
+    DevolverLivro(nome){
+        for (let index = 0; index < this.Livros.length; index++) {
+            if(nome == this.Livros[index].Titulos){
+                if(this.Livros[index].Disponibilidades == true){
+                    alert("O livro já foi devolvido!!!")
+                }else{
+                    alert("Obrigado por devolver o livro!")
+                    this.Livros[index].Disponibilidades = true
+                }
+            }         
+        }
+    }
 }
 
 let biblioteca = new Biblioteca()
@@ -95,7 +108,7 @@ let biblioteca = new Biblioteca()
         let desejar = "0"
 
         do {
-            desejar = prompt("O que deseja fazer? 1 = criar novo Livro. 2 = Buscar livro em nossa biblioteca. 3 = Pedir emprestado o livro. 4 = Sair do site")
+            desejar = prompt("O que deseja fazer? 1 = criar novo Livro. 2 = Buscar livro em nossa biblioteca. 3 = Pedir emprestado o livro. 4 = Devolver o Livro. 5 = Sair do site")
             switch (desejar) {
                 case "1":
                     let livro = new Livro()
@@ -113,10 +126,15 @@ let biblioteca = new Biblioteca()
                     break;
 
                 case "4":
+                    let nome3 = prompt("Informe o livro que deseja devolver")
+                    biblioteca.DevolverLivro(nome3)
+                    break;
+
+                case "5":
                     alert("Obrigado por usar nosso site!")
                     break;
 
                 default:
                     break;
             }
-        } while (desejar != "4");
+        } while (desejar != "5");

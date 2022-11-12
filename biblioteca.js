@@ -29,10 +29,28 @@ disponibilidade desse livro para true;
 7. Crie um objeto da classe Biblioteca e chame seus métodos
 */
 
+let indexGeral = 0
+
 class Livro{
     Titulos = []
     Autores = []
     Editoras = []
     Anos = []
     Disponibilidades = []
+
+    constructor(){
+        this.Titulos[indexGeral] = prompt("Informe o nome do livro.")
+        this.Autores[indexGeral] = prompt("Informe o nome do autor.")
+        this.Editoras[indexGeral] = prompt("Informe a editora do livro.")
+        this.Anos[indexGeral] = parseInt(prompt("Informe o ano de publicação do livro."))
+        this.Disponibilidades[indexGeral] = prompt("O livro está disponível?. s = sim e n = não")
+        if(this.Disponibilidades[indexGeral] == "s"){
+            this.Disponibilidades[indexGeral] = true
+        }else{
+            this.Disponibilidades[indexGeral] = false
+        }
+        indexGeral++
+    }
 }
+
+let livro = new Livro()

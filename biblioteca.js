@@ -34,51 +34,89 @@ let IndexBiblioteca = 0
 
 
 class Livro{
-    Titulos = []
-    Autores = []
-    Editoras = []
-    Anos = []
-    Disponibilidades = []
+    Titulos
+    Autores 
+    Editoras 
+    Anos 
+    Disponibilidades 
 
     constructor(){
-        this.Titulos[indexLivro] = prompt("Informe o nome do livro.")
-        this.Autores[indexLivro] = prompt("Informe o nome do autor.")
-        this.Editoras[indexLivro] = prompt("Informe a editora do livro.")
-        this.Anos[indexLivro] = parseInt(prompt("Informe o ano de publicação do livro."))
-        this.Disponibilidades[indexLivro] = prompt("O livro está disponível?. s = sim e n = não")
-        if(this.Disponibilidades[indexLivro] == "s"){
-            this.Disponibilidades[indexLivro] = true
+        this.Titulos = prompt("Informe o nome do livro.")
+        this.Autores = prompt("Informe o nome do autor.")
+        this.Editoras = prompt("Informe a editora do livro.")
+        this.Anos = parseInt(prompt("Informe o ano de publicação do livro."))
+        this.Disponibilidades = prompt("O livro está disponível?. s = sim e n = não")
+        if(this.Disponibilidades == "s"){
+            this.Disponibilidades = true
         }else{
-            this.Disponibilidades[indexLivro] = false
+            this.Disponibilidades = false
         }
-        indexLivro++
     }
 }
 
 class Biblioteca{
-    Livros
-    NomeBiblioteca = []
-    EnderecoBiblioteca = []
-    TelefoneBiblioteca = []
+    Livros = []
+    NomeBiblioteca 
+    EnderecoBiblioteca 
+    TelefoneBiblioteca 
 
     constructor(){
-        this.NomeBiblioteca[IndexBiblioteca] = prompt("Informe o nome da biblioteca.")
-        this.EnderecoBiblioteca[IndexBiblioteca] = prompt("Informe o endereço da biblioteca.")
-        this.TelefoneBiblioteca[IndexBiblioteca] = parseInt(prompt("Informe o telefone da biblioteca."))
+        this.NomeBiblioteca = prompt("Informe o nome da biblioteca.")
+        this.EnderecoBiblioteca = prompt("Informe o endereço da biblioteca.")
+        this.TelefoneBiblioteca = parseInt(prompt("Informe o telefone da biblioteca."))
     }
 
     BuscarLivro(nome){
-        for (let index = 0; index < indexLivro; index++) {
-            if(nome == this.Livros.Titulos[index]){
-                alert("O nome do livro é " + this.Livros.Titulos[index] + ". O seu autor é " + this.Livros.Autores[index] + ". Editado por " + this.Livros.Editoras[index] + ". Publicado em " + this.Livros.Anos[index] + ". Disponibilidade (true = tem disponibilidade e false = não tem): " + this.Livros.Disponibilidades[index])
+        for (let index = 0; index < this.Livros.length; index++) {
+            if(nome == this.Livros[index].Titulos){
+                alert("O nome do livro é " + this.Livros[index].Titulos + ". O seu autor é " + this.Livros[index].Autores + ". Editado por " + this.Livros[index].Editoras + ". Publicado em " + this.Livros[index].Anos + ". Disponibilidade (true = tem disponibilidade e false = não tem): " + this.Livros[index].Disponibilidades)
+            }         
+        }
+
+    }
+
+    EmprestarLivro(nome){
+        for (let index = 0; index < this.Livros.length; index++) {
+            if(nome == this.Livros[index].Titulos){
+                if(this.Livros[index].Disponibilidades == true){
+                    alert("O livro foi emprestado a você, cuide bem dele!!!")
+                    this.Livros[index].Disponibilidades = false
+                }else{
+                    alert("O livro foi emprestado a outra pessoa, sinto muito!")
+                }
             }         
         }
     }
 }
 
+let biblioteca = new Biblioteca()
 
-        let livro = new Livro()
-        let biblioteca = new Biblioteca()
-        biblioteca.Livros = livro
-        let nome = prompt("Informe o livro que deseja buscar em nossa biblioteca.")
-        biblioteca.BuscarLivro(nome)
+
+        let desejar = "0"
+
+        do {
+            desejar = prompt("O que deseja fazer? 1 = criar novo Livro. 2 = Buscar livro em nossa biblioteca. 3 = Pedir emprestado o livro. 4 = Sair do site")
+            switch (desejar) {
+                case "1":
+                    let livro = new Livro()
+                    biblioteca.Livros.push(livro)
+                    indexLivro++
+                    break;
+                case "2":
+                    let nome = prompt("Informe o livro que deseja buscar em nossa biblioteca.")
+                    biblioteca.BuscarLivro(nome)
+                    break;
+
+                case "3":
+                    let nome2 = prompt("Informe o livro que deseja pegar emprestado")
+                    biblioteca.EmprestarLivro(nome2)
+                    break;
+
+                case "4":
+                    alert("Obrigado por usar nosso site!")
+                    break;
+
+                default:
+                    break;
+            }
+        } while (desejar != "4");
